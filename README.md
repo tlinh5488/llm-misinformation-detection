@@ -7,6 +7,7 @@ This project investigates the detection of misinformation using Large Language M
 2. 📊 DATASETS
 
    FakeNewsNet: Real-world news verified by humans.
+
    LLM-generated: Synthetic fake news created by AI.
    
 4. 📂 PROJECT STRUCTURE
@@ -31,11 +32,9 @@ RoBERTa: Optimized training for higher accuracy.
 
 6. 📈 PERFORMANCE RESULTS
 
-MODEL,ACCURACY,F1-SCORE,STATUS
 
-BERT,0.83,0.82,Baseline
+<img width="898" height="208" alt="image" src="https://github.com/user-attachments/assets/a7b8aa58-b101-42ff-b7a8-4c125f012140" />
 
-RoBERTa,0.86,0.85,TOP
 
 💡 Observation: RoBERTa outperforms BERT by ~3%, showing better performance in AI-generated text detection.
 
