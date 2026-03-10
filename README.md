@@ -1,4 +1,4 @@
-==============🚀 PROJECT: LLM MISINFORMATION DETECTION 🚀==============
+==================🚀 PROJECT: LLM MISINFORMATION DETECTION 🚀==================
 
 1. 📋 PROJECT OVERVIEW
 
