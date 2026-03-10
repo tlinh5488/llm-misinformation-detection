@@ -1,4 +1,4 @@
-============================================================🚀 PROJECT: LLM MISINFORMATION DETECTION 🚀============================================================
+===========================🚀 PROJECT: LLM MISINFORMATION DETECTION 🚀===========================
 
 1. 📋 PROJECT OVERVIEW
 
@@ -36,6 +36,7 @@ RoBERTa: Optimized training for higher accuracy.
 <img width="898" height="208" alt="image" src="https://github.com/user-attachments/assets/a7b8aa58-b101-42ff-b7a8-4c125f012140" />
 
 
+
 💡 Observation: RoBERTa outperforms BERT by ~3%, showing better performance in AI-generated text detection.
 
 7. 🛠 HOW TO RUN
@@ -52,4 +53,4 @@ Author: Thuy Linh
 
 GitHub: https://github.com/tlinh5488/llm-misinformation-detection
 
-============================================================✨ THANKS FOR VISITING! ✨
+=========================✨ THANKS FOR VISITING! ✨ ================
