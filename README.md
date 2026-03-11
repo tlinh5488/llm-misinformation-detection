@@ -33,7 +33,7 @@ RoBERTa: Optimized training for higher accuracy.
 6. 📈 PERFORMANCE RESULTS
 
 
-<img width="898" height="208" alt="image" src="https://github.com/user-attachments/assets/a7b8aa58-b101-42ff-b7a8-4c125f012140" />
+<img width="767" height="222" alt="image" src="https://github.com/user-attachments/assets/cf7ec316-47e7-41ec-b7f3-579b0f69d3c7" />
 
 
 
