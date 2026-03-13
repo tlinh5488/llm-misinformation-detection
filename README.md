@@ -6,9 +6,9 @@ This project investigates the detection of misinformation using Large Language M
 
 2. 📊 DATASETS
 
-   FakeNewsNet: Real-world news verified by humans.
+   FakeNewsNet: Real-world news verified by humans. https://github.com/KaiDMML/FakeNewsNetv 
 
-   LLM-generated: Synthetic fake news created by AI.
+   LLM-generated: Synthetic fake news created by AI. https://github.com/llm-misinformation/llm-misinformation 
    
 4. 📂 PROJECT STRUCTURE
 
