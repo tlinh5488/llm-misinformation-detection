@@ -14,10 +14,17 @@ st.set_page_config(
 )
 
 st.title("📰 Fake News Detection System")
+st.markdown(
+"""
+Detect whether a news article is **Real** or **Fake** using fine-tuned Transformer models.
 
-st.write(
-    "Detect whether a news text is **Real** or **Fake** using Transformer models."
+Models available:
+- **BERT (fine-tuned)**
+- **RoBERTa / DistilRoBERTa (fine-tuned)**
+"""
 )
+
+st.markdown("---")
 
 
 # ======================
@@ -32,14 +39,18 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # ======================
 
 model_option = st.selectbox(
-    "Choose model",
+    "Select Model",
     ["BERT", "RoBERTa"]
 )
 
 if model_option == "BERT":
     model_path = "results/bert_results"
+    model_info = "BERT-base fine-tuned on FakeNews dataset"
 else:
     model_path = "results/roberta_results"
+    model_info = "RoBERTa / DistilRoBERTa fine-tuned on FakeNews dataset"
+
+st.info(model_info)
 
 
 # ======================
@@ -47,14 +58,13 @@ else:
 # ======================
 
 @st.cache_resource
-def load_model(model_path):
+def load_model(path):
 
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    tokenizer = AutoTokenizer.from_pretrained(path)
 
-    model = AutoModelForSequenceClassification.from_pretrained(model_path)
+    model = AutoModelForSequenceClassification.from_pretrained(path)
 
     model.to(device)
-
     model.eval()
 
     return tokenizer, model
@@ -64,7 +74,7 @@ tokenizer, model = load_model(model_path)
 
 
 # ======================
-# Prediction
+# Prediction function
 # ======================
 
 def predict(text):
@@ -74,7 +84,7 @@ def predict(text):
         return_tensors="pt",
         truncation=True,
         padding=True,
-        max_length=64
+        max_length=96
     )
 
     inputs = {k: v.to(device) for k, v in inputs.items()}
@@ -97,12 +107,13 @@ def predict(text):
 
 
 # ======================
-# Text input
+# Input text
 # ======================
 
 text = st.text_area(
-    "Enter news text",
-    height=150
+    "Enter News Article",
+    placeholder="Paste a news article or statement here...",
+    height=180
 )
 
 
@@ -110,40 +121,43 @@ text = st.text_area(
 # Detect button
 # ======================
 
-if st.button("Detect"):
+if st.button("🔍 Detect Fake News"):
 
     if text.strip() == "":
-        st.warning("Please enter some text")
-
+        st.warning("Please enter a news text first.")
     else:
 
-        with st.spinner("Analyzing news..."):
+        with st.spinner("Analyzing text..."):
 
             label, confidence, probs = predict(text)
 
+        st.markdown("## Prediction Result")
+
         if label == "Fake News":
-
             st.error(f"⚠️ {label}")
-
         else:
-
             st.success(f"✅ {label}")
 
         st.write(f"Confidence: **{confidence*100:.2f}%**")
 
-        st.write("### Class probabilities")
+        st.markdown("### Probability Distribution")
 
-        st.write(f"Real: {probs[0][0].item()*100:.2f}%")
-        st.write(f"Fake: {probs[0][1].item()*100:.2f}%")
+        real_prob = probs[0][0].item()
+        fake_prob = probs[0][1].item()
+
+        st.write("Real News")
+        st.progress(real_prob)
+
+        st.write("Fake News")
+        st.progress(fake_prob)
 
 
 # ======================
-# Examples
+# Example texts
 # ======================
 
 st.markdown("---")
-
-st.write("### Example texts")
+st.markdown("### Example News")
 
 example_fake = "Scientists confirm that drinking bleach cures COVID-19."
 
@@ -159,7 +173,6 @@ with col1:
         label, confidence, _ = predict(example_fake)
 
         st.write(example_fake)
-
         st.write(label, f"{confidence*100:.2f}%")
 
 with col2:
@@ -169,5 +182,4 @@ with col2:
         label, confidence, _ = predict(example_real)
 
         st.write(example_real)
-
         st.write(label, f"{confidence*100:.2f}%")
